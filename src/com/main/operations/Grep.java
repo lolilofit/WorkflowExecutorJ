@@ -1,8 +1,6 @@
 package com.main.operations;
 
-import com.main.Main;
 import com.main.OperationsInterface;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -6,8 +6,7 @@ import org.junit.Test;
 public class ReplaceTest {
     @Test
     public void _replace() {
-        /*
-        //Factory factory = new Factory();
+
         try {
             Factory.getInstance().create_op("com.main.operations", "replace");
         }catch (Exception e) {
@@ -19,6 +18,6 @@ public class ReplaceTest {
         Assert.assertTrue("Hello user\n Hello user\n Hello user".equals(replace.block_work("world user", "Hello world\n Hello world\n Hello world")));
         Assert.assertTrue("Hello user!".equals(replace.block_work("world user", "Hello world!")));
         Assert.assertTrue("Hello world\n Hello world".equals(replace.block_work("nothing user", "Hello world\n Hello world")));
-*/
+
     }
 }

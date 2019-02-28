@@ -8,7 +8,6 @@ import org.junit.Test;
 public class SortTest {
    @Test
    public void _sort() {
-/*
        try {
            Factory.getInstance().create_op("com.main.operations", "sort");
        }catch (Exception e) {
@@ -22,7 +21,7 @@ public class SortTest {
        Assert.assertTrue("aaa\naba\nabc\nbaa\nbba\nbbc\nbcc".equals(sort.block_work("", "bcc\nbba\nbbc\naaa\naba\nbaa\nabc")));
        Assert.assertTrue("aaa\naba\nabc\nbaa\nbba\nbbc\nbcc".equals(sort.block_work("", "bba\nbcc\nbbc\naaa\naba\nbaa\nabc")));
        Assert.assertTrue("aaa\naba\nabc\nbaa\nbba\nbbc\nbcc".equals(sort.block_work("", "bcc\nbbc\nbba\nbaa\nabc\naba\naaa")));
-*/
+
    }
 
 }

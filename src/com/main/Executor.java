@@ -1,10 +1,10 @@
 package com.main;
 
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Executor {
     private FileInputStream in;
@@ -13,6 +13,7 @@ public class Executor {
     private String package_name;
     private String workflow_in_name;
 
+    private static Logger log = Logger.getLogger(Executor.class.getName());
 
     public Executor(String workflow_in, String pac_name) {
         workflow_in_name = workflow_in;
@@ -21,39 +22,37 @@ public class Executor {
         block_args = new HashMap<>();
     }
 
-    private void open_file() throws IOException {
-        in = new FileInputStream(workflow_in_name);
-    }
-    private void close_file() throws  IOException {
-        in.close();
-    }
-
     public void executor() throws Exception {
         String[] line;
         boolean csed = true;
         String current_res = "";
 
-        open_file();
-        ReadPars reader = new ReadPars(in);
-        while((line = reader.read())[0].equals("")) {
+        try {
+            in = new FileInputStream(workflow_in_name);
+            ReadPars reader = new ReadPars(in);
 
-            if(line[0].equals("csed"))
-                csed = true;
-            else {
-                if(line[0].equals("desc"))
-                    csed = false;
+            while (!(line = reader.read())[0].equals("")) {
+
+                if (line[0].equals("csed"))
+                    csed = true;
                 else {
-                    if (csed == false) {
-                        // String full_name = package_name + line[1];
-                        blocks.put(line[0], Factory.getInstance().create_op(package_name, line[1]));
-                        block_args.put(line[0], line[2]);
-                    } else {
-                        current_res = blocks.get(line[0]).block_work(block_args.get(line[0]), current_res);
+                    if (line[0].equals("desc"))
+                        csed = false;
+                    else {
+                        if (!csed) {
+                            blocks.put(line[0], Factory.getInstance().create_op(package_name, line[1]));
+                            block_args.put(line[0], line[2]);
+                        } else {
+                            current_res = blocks.get(line[0]).block_work(block_args.get(line[0]), current_res);
+                        }
                     }
                 }
             }
         }
-        close();
+        catch (Exception e) {
+            log.log(Level.SEVERE, "Exception happened: ", e);
+        }
+        in.close();
     }
 }
 
