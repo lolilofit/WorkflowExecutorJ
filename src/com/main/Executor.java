@@ -31,12 +31,12 @@ public class Executor {
     public void executor() throws Exception {
         String[] line;
         boolean csed = true;
-        Factory factory = new Factory();
         String current_res = "";
 
         open_file();
         ReadPars reader = new ReadPars(in);
         while((line = reader.read())[0].equals("")) {
+
             if(line[0].equals("csed"))
                 csed = true;
             else {
@@ -45,7 +45,7 @@ public class Executor {
                 else {
                     if (csed == false) {
                         // String full_name = package_name + line[1];
-                        blocks.put(line[0], factory.create_op(package_name, line[1]));
+                        blocks.put(line[0], Factory.getInstance().create_op(package_name, line[1]));
                         block_args.put(line[0], line[2]);
                     } else {
                         current_res = blocks.get(line[0]).block_work(block_args.get(line[0]), current_res);
@@ -53,7 +53,7 @@ public class Executor {
                 }
             }
         }
-        close_file();
+        close();
     }
 }
 
